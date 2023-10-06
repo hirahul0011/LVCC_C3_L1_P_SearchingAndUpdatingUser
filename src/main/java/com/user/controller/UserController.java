@@ -64,5 +64,56 @@ public class UserController {
 		return page;
 		
 	}
+	
+	@RequestMapping(value="changeDetailsValidation",method=RequestMethod.POST)	
+	public String changeDetailsValidation(@RequestParam("userId")String userId,
+			@RequestParam("password")String password,
+			@RequestParam("firstName")String firstName,
+			@RequestParam("lastName")String lastName,
+			@RequestParam("age")Integer age,
+			@RequestParam("gender")String gender,
+			ModelMap map){
+		
+		String page="changeDetails";		
+		
+		map.addAttribute("userId", userId);
+		map.addAttribute("password", password);
+		map.addAttribute("firstName", firstName);
+		map.addAttribute("lastName", lastName);
+		map.addAttribute("age", age);
+		map.addAttribute("gender", gender);
+		
+		String errorMessages="";
+		
+		if(password!=null) {
+			if(password.length()<8 || password.length()>15) {
+				errorMessages=errorMessages+"<br>Please enter password between 8 to 15 character length!";							
+			}			
+		}else {
+			errorMessages=errorMessages+"<br>Please enter Password to continue!";			
+		}
+		
+		if(firstName==null) {			
+			errorMessages=errorMessages+"<br>Please enter First Name to continue!";			
+		}
+		
+		if(lastName==null) {			
+			errorMessages=errorMessages+"<br>Please enter Last Name to continue!";			
+		}
+		
+		if(age<=0 || age>=150) {			
+			errorMessages=errorMessages+"<br>Please enter some valid age to continue!";			
+		}		
+		
+		if(errorMessages=="") {				
+			parametersDAO.changeUserDetails(userId, password, firstName, lastName, age, gender);
+			page="adminChangePassConfirmation";					
+		}else {
+			map.addAttribute("errorMessages", errorMessages);			
+		}
+		
+		return page;
+		
+	}
 
 }
