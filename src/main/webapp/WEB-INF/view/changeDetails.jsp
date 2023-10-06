@@ -13,7 +13,7 @@
 	<form action="changeDetailsValidation" method="post">
 	<table>		
 		<tr>			
-			<td>First Name: </td>
+			<td>User ID: </td>
 			<td><input type="text" name="userId" placeholder="${userId}" 
 			value="${userId}" disabled>
 			<input type="hidden" name="userId" placeholder="${userId}" 
@@ -21,19 +21,23 @@
 		</tr>
 		<tr>
 			<td>Password: </td>
-			<td><input type="text" name="password" placeholder="${password}"></td>
+			<td><input type="text" name="password" placeholder="${password}"
+			value="${password}"></td>
 		</tr>
 		<tr>
 			<td>First Name: </td>
-			<td><input type="text" name="firstName" placeholder="${firstName}"></td>			
+			<td><input type="text" name="firstName" placeholder="${firstName}"
+			value="${firstName}"></td>			
 		</tr>
 		<tr>			
 			<td>Last Name: </td>
-			<td><input type="text" name="lastName" placeholder="${lastName}"></td>			
+			<td><input type="text" name="lastName" placeholder="${lastName}"
+			value="${lastName}"></td>			
 		</tr>
 		<tr>			
 			<td>Age: </td>
-			<td><input type="number" name="age" placeholder="${age}"></td>			
+			<td><input type="number" name="age" placeholder="${age}"
+			value="${age}"></td>			
 		</tr>
 		<tr>			
 			<td>Gender: </td>
@@ -43,7 +47,7 @@
 			value="${gender}"></td>			
 		</tr>		
 	</table><br>
-	<span style="color:red">${errorMessage}</span><br/>	
+	<span style="color:red">${errorMessages}</span><br/>	
 	<table>							
 		<tr>
 			<input type="submit" value="Submit"/>			

@@ -85,7 +85,7 @@ public class UserController {
 		
 		String errorMessages="";
 		
-		if(password!=null) {
+		if(password!="") {
 			if(password.length()<8 || password.length()>15) {
 				errorMessages=errorMessages+"<br>Please enter password between 8 to 15 character length!";							
 			}			
@@ -93,27 +93,51 @@ public class UserController {
 			errorMessages=errorMessages+"<br>Please enter Password to continue!";			
 		}
 		
-		if(firstName==null) {			
+		if(firstName=="") {			
 			errorMessages=errorMessages+"<br>Please enter First Name to continue!";			
 		}
 		
-		if(lastName==null) {			
+		if(lastName=="") {			
 			errorMessages=errorMessages+"<br>Please enter Last Name to continue!";			
 		}
 		
-		if(age<=0 || age>=150) {			
-			errorMessages=errorMessages+"<br>Please enter some valid age to continue!";			
-		}		
+		if(age!=null) {
+			if(age<=0 || age>=150) {			
+				errorMessages=errorMessages+"<br>Please enter some valid age to continue!";			
+			}			
+		}else {
+			errorMessages=errorMessages+"<br>Please enter the age to continue!";
+		}
+				
 		
 		if(errorMessages=="") {				
 			parametersDAO.changeUserDetails(userId, password, firstName, lastName, age, gender);
-			page="adminChangePassConfirmation";					
+			page="changeDetailsConfirmation";					
 		}else {
 			map.addAttribute("errorMessages", errorMessages);			
 		}
 		
 		return page;
 		
+	}
+	
+	@RequestMapping(value="redirectII",method=RequestMethod.GET)	
+	public String redirectII(@RequestParam(required=false, name="userId")String userId,			
+			ModelMap map){
+		
+		String page="details";		
+		List<User> user=(List<User>)parametersDAO.getTheUserDetails(userId);		
+		map.addAttribute("user", user.get(0));	
+		map.addAttribute("userFirstName", user.get(0).getFirstName());				
+		
+		return page;		
+	}
+	
+	@RequestMapping(value="redirectIII",method=RequestMethod.GET)	
+	public String redirectIII(){
+		
+		String page="login";				
+		return page;		
 	}
 
 }

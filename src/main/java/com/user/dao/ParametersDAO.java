@@ -28,19 +28,30 @@ public class ParametersDAO {
 
 	public void setHbnTransactionManager(HibernateTransactionManager hbnTransactionManager) {
 		this.hbnTransactionManager = hbnTransactionManager;
-	}		
-	
-	public List<User> getTheUserDetails(String userId){ 
-		SessionFactory sessionFactory=hbnTransactionManager.getSessionFactory();
-		Query query= sessionFactory.getCurrentSession().createQuery("select u from User u where u.userId= :userId"); 
-        query.setParameter("userId", userId);
-        return query.list();
-		
 	}
 	
+	public Session getSession() {
+	    try {
+	        return hbnTransactionManager.getSessionFactory().getCurrentSession();
+	    } catch (Exception e) {
+	        return hbnTransactionManager.getSessionFactory().openSession();
+	    }
+	}
+	
+	@SuppressWarnings("deprecation")
+	public List<User> getTheUserDetails(String userId){ 
+//		SessionFactory sessionFactory=hbnTransactionManager.getSessionFactory();
+//		Query query= sessionFactory.getCurrentSession().createQuery("select u from User u where u.userId= :userId");
+		Query<User> query= getSession().createQuery("select u from User u where u.userId= :userId",User.class);
+        query.setParameter("userId", userId);
+        return query.list();		
+	}
+	
+	@SuppressWarnings("deprecation")
 	public List<User> getAllUsersDetails(){
-		SessionFactory sessionFactory=hbnTransactionManager.getSessionFactory();
-		Query query= sessionFactory.getCurrentSession().createQuery("from User");        
+//		SessionFactory sessionFactory=hbnTransactionManager.getSessionFactory();
+//		Query query= sessionFactory.getCurrentSession().createQuery("from User");
+		Query query= getSession().createQuery("from User");
         return query.list();		
 	}
 	

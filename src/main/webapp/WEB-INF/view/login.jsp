@@ -9,12 +9,11 @@
 <body>
 
 	<div align="center">
-	<h2>Please login to search for the Flights</h2>	
+	<h2>Please login</h2>	
 	<form action="validationCheck" method="post">
 		Enter UserName: <input type="text" name="username"/><br/><br>		
 		Enter Password: <input type="password" name="password"><br/>
-		<span style="color:red">${errorMessage}</span><br/>
-		<h6>Please use Admin UserName to login as Administrator</h6>
+		<span style="color:red">${errorMessage}</span><br/>		
 		<input type="submit" value="login">
 	</form>
 	</div>

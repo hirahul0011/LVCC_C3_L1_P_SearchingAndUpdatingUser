@@ -42,8 +42,11 @@
 	class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="annotatedClasses">
+		<!-- Entities Must be added in this list -->
 		<list>
-			<value></value>			
+			<value>com.user.entity.User</value>
+			<value>com.user.dao.ParametersDAO</value>
+			<value>com.user.controller.UserController</value>			
 		</list>
 		</property>
 		
@@ -53,6 +56,8 @@
 				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
 				
 				<prop key="current_session_context_class">thread</prop>
+				<!-- <prop key="current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</prop> -->
+				<!-- <prop key="current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop> -->
 				
 				<prop key="connection.pool_size">3</prop>
 				

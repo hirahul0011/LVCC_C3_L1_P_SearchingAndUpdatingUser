@@ -1,25 +1,32 @@
 package com.user.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.Id;
+//import javax.persistence.Table;
 
 @Entity
+@Table
 public class User {
 	
 	@Id
-	@Column	
+	@Column(name="userId")	
 	private String userId;
-	@Column	
+	@Column(name="password")	
 	private String password;
-	@Column
+	@Column(name="firstName")
 	private String firstName;
-	@Column
+	@Column(name="lastName")
 	private String lastName;
-	@Column
+	@Column(name="age")
 	private int age;
-	@Column
+	@Column(name="gender")
 	private String gender;
 	
 	public User() {
