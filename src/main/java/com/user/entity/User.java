@@ -9,9 +9,10 @@ import javax.persistence.Id;
 public class User {
 	
 	@Id
-	@Column
-	@GeneratedValue
-	private Long id;
+	@Column	
+	private String userId;
+	@Column	
+	private String password;
 	@Column
 	private String firstName;
 	@Column
@@ -24,22 +25,31 @@ public class User {
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
+	}	
 
-	public User(String firstName, String lastName, int age, String gender) {
+	public User(String password, String firstName, String lastName, int age, String gender) {
 		super();
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.gender = gender;
 	}
 
-	public Long getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -76,9 +86,11 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", gender="
-				+ gender + "]";
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
+				+ ", gender=" + gender + "]";
 	}
+
+	
 	
 	
 	
