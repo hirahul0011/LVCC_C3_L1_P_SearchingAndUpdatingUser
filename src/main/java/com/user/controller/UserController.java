@@ -24,12 +24,12 @@ public class UserController {
 		String page="login";
 		if(userId!="") {			
 			try {				
-					List<User> user=(List<User>)parametersDAO.getTheUserDetails(userId);
-					List<User> users=(List<User>)parametersDAO.getAllUsersDetails();
+					List<User> user=(List<User>)parametersDAO.getTheUserDetails(userId);					
 					if(userId.equalsIgnoreCase(user.get(0).getUserId()) && password.equals(user.get(0).getPassword())) {				
+						map.addAttribute("user", user.get(0));
 						map.addAttribute("userId", userId);
-						map.addAttribute("users", users);
-						page="administration";
+						map.addAttribute("userFirstName", user.get(0).getFirstName());
+						page="details";
 					}else {
 						map.addAttribute("errorMessage", "Invalid login credentials");
 					}								
@@ -41,6 +41,28 @@ public class UserController {
 			map.addAttribute("errorMessage", "Please enter the UserName");
 		}		
 		return page;		
+	}
+	
+	@RequestMapping(value="changeDetails",method=RequestMethod.GET)	
+	public String changeDetails(@RequestParam("userId")String userId,
+			@RequestParam("password")String password,
+			@RequestParam("firstName")String firstName,
+			@RequestParam("lastName")String lastName,
+			@RequestParam("age")Integer age,
+			@RequestParam("gender")String gender,
+			ModelMap map){
+		
+		String page="changeDetails";		
+		
+		map.addAttribute("userId", userId);
+		map.addAttribute("password", password);
+		map.addAttribute("firstName", firstName);
+		map.addAttribute("lastName", lastName);
+		map.addAttribute("age", age);
+		map.addAttribute("gender", gender);				
+		
+		return page;
+		
 	}
 
 }
